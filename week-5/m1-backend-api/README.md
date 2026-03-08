@@ -39,24 +39,40 @@ All responses follow a standard envelope structure.
 ```json
 {
   "success": false,
-  "statusCode": <number>,
   "message": "<string>",
-  "errors": ["<string>"]
+  "error_code": "<string>",
+  "timestamp": "<ISO-8601 string>",
+  "path": "<string>",
+  "errors": [
+    {
+      "field": "<string>",
+      "message": "<string>"
+    }
+  ]
 }
 ```
 
 The `errors` array is only present for validation failures (400 Bad Request).
+See `docs/error-handling.md` for the full Module 3 error reference guide.
 
 Example validation error:
 
 ```json
 {
   "success": false,
-  "statusCode": 400,
   "message": "Validation failed",
+  "error_code": "VALIDATION_ERROR",
+  "timestamp": "2026-03-05T10:30:00.000Z",
+  "path": "/api/v1/users",
   "errors": [
-    "email must be an email",
-    "password must be longer than or equal to 8 characters"
+    {
+      "field": "email",
+      "message": "email must be an email"
+    },
+    {
+      "field": "password",
+      "message": "password must be longer than or equal to 8 characters"
+    }
   ]
 }
 ```
