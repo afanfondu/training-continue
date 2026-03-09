@@ -60,13 +60,11 @@ export async function createTestApp(): Promise<{
 }
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication<App>;
-  let dataSource: DataSource;
+  let app: INestApplication;
 
   beforeAll(async () => {
     const testApp = await createTestApp();
     app = testApp.app;
-    dataSource = testApp.dataSource;
   });
 
   afterAll(async () => {
@@ -74,7 +72,9 @@ describe('AppController (e2e)', () => {
   });
 
   it('GET /api/v1 returns Hello World with success envelope', async () => {
-    const res = await request(app.getHttpServer()).get('/api/v1').expect(200);
+    const res = await request(app.getHttpServer() as App)
+      .get('/api/v1')
+      .expect(200);
 
     expect(res.body).toEqual({ success: true, data: 'Hello World!' });
   });
