@@ -2,10 +2,15 @@ import {
   ArgumentsHost,
   BadRequestException,
   HttpException,
+  Logger,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from './http-exception.filter';
 
 describe('HttpExceptionFilter', () => {
+  beforeAll(() => {
+    jest.spyOn(Logger.prototype, 'error').mockImplementation(() => {});
+  });
+
   const createHost = (url = '/api/v1/users', method = 'GET') => {
     const json = jest.fn();
     const status = jest.fn().mockReturnValue({ json });

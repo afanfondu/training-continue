@@ -52,7 +52,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
           ? rawMessage[0]
           : typeof exceptionResponse === 'string'
             ? exceptionResponse
-            : 'Somthing went wrong!';
+            : 'Service temporarily unavailable';
 
     const errors = Array.isArray(resObj.errors)
       ? (resObj.errors as ValidationErrorDetail[])
