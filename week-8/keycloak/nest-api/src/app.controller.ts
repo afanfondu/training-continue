@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthenticatedUser, Public, Roles } from 'nest-keycloak-connect';
-import { ROLES } from './common/enums/roles.enum';
+import { ROLE } from './common/enums/role.enum';
 
 @Controller()
 export class AppController {
@@ -18,7 +18,7 @@ export class AppController {
     return user;
   }
 
-  @Roles({ roles: [ROLES.ADMIN] })
+  @Roles({ roles: [ROLE.ADMIN] })
   @Get('admin')
   admin(): string {
     return 'admin-data';
