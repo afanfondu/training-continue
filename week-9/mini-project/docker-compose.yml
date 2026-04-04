@@ -1,0 +1,27 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: m1-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpassword}
+      MYSQL_DATABASE: ${DB_DATABASE:-m1_backend}
+      MYSQL_USER: ${DB_USERNAME:-m1user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-m1password}
+    ports:
+      - '${DB_PORT:-3306}:3306'
+    volumes:
+      - .data/mysql-data:/var/lib/mysql
+  mysql-test:
+    image: mysql:8.0
+    container_name: m1-mysql-test
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: m1_backend_test
+      MYSQL_USER: m1user
+      MYSQL_PASSWORD: m1password
+    ports:
+      - '3307:3306'
+    volumes:
+      - .data/mysql-test-data:/var/lib/mysql

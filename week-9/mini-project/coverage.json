@@ -1,0 +1,4 @@
+
+> m1-backend-api@0.0.1 test /home/afan/code/training-continue/week-5/m1-backend-api
+> jest -- --coverage src/users/ --coverageReporters=json-summary
+
